@@ -39,9 +39,9 @@ jobs:
       - name: Build
         run: |
           npm run build --force
-      - name: lint
+      - name: Lint
         run: |
-          ng lint
+          npm run lint
       - name: Update types to latest
         run: |
           npm install --save-dev @types/node@latest --force
@@ -54,9 +54,7 @@ jobs:
         with:
           github-token: ${{ secrets.WORKSHOP6_GITHUB_TOKEN }}
           output-file: "false"
-      - name: Audit 
-        run: |
-          npm audit fix
+
       - name: Create Release
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
@@ -69,6 +67,3 @@ jobs:
       - name: Deploy
         run: |
           npm run deploy
-      - name: delete branch
-        run: |
-          git push origin :testest
